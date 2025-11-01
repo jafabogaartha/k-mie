@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esteh Ibukota</title>
+
+    <!-- Meta SEO -->
+    <meta name="description"
+        content="K-Mie Official- Paket usaha minuman teh kekinian dengan rasa segar dan harga terjangkau. Cocok untuk bisnis kuliner anak muda.">
+    <meta name="keywords"
+        content="Esteh Ibukota, teh kekinian, usaha minuman, franchise minuman, bisnis kuliner, es teh murah enak">
+    <meta name="author" content="CV Maha Niaga Artha">
+
+    <!-- Open Graph (Facebook, WhatsApp, dll) -->
+    <meta property="og:title" content="Esteh Ibukota">
+    <meta property="og:description" content="Paket usaha minuman teh kekinian dengan rasa segar dan harga terjangkau.">
+    <meta property="og:image" content="assets/slidefoto/FOTO3.webp">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Esteh Ibukota">
+    <meta name="twitter:description" content="Paket usaha minuman teh kekinian dengan rasa segar dan harga terjangkau.">
+    <meta name="twitter:image" content="assets/slidefoto/FOTO3.webp">
+
+    <!-- Google Fonts: Poppins untuk tampilan yang lebih modern -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+    <style>
+        /* CSS Variables for easy theming */
+        :root {
+            --primary-color: #3ce73c;
+            --primary-dark: #10e722;
+            --secondary-dark: #a93226;
+            --text-light: #fefefe;
+            --text-dark: #333;
+            --text-medium: #666;
+            --bg-light: #fff;
+            --bg-dark: #000;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(231, 76, 60, 0.4);
+            --shadow-strong: rgba(231, 76, 60, 0.6);
+            --border-radius-small: 10px;
+            --border-radius-medium: 15px;
+            --border-radius-large: 20px;
+        }
+
+        /* Global Reset & Basic Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: var(--bg-light);
+            overflow-x: hidden;
+            font-family: 'Poppins', Arial, sans-serif;
+            color: var(--text-dark);
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        * {
+            -webkit-user-drag: none;
+            user-drag: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Main Container for all images and slideshows */
+        .image-stack-wrapper {
+            width: 100%;
+            margin: 0 auto;
+            max-width: 450px;
+            background: var(--bg-light);
+            box-shadow: 0 0 20px var(--shadow-light);
+        }
+
+        /* Default style for all images inside the wrapper */
+        .image-stack-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            background-color: #f0f0f0;
+        }
+
+        .image-stack-wrapper img.loaded {
+            opacity: 1;
+            background-color: transparent;
+        }
+
+        .form-iframe-container {
+            width: 100%;
+            height: 800px;
+        }
+
+        .form-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* CSS UNTUK TOMBOL DI ATAS GAMBAR */
+        .image-button-container {
+            position: relative;
+            width: 100%;
+            /* Pastikan line-height 0 agar tidak ada spasi ekstra di bawah gambar */
+            line-height: 0;
+        }
+
+        /* GAYA DASAR/UMUM untuk semua tombol overlay */
+        .overlay-button-link {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: block;
+            transition: transform 0.2s ease-out;
+        }
+
+        .overlay-button-link:hover {
+            transform: translateX(-50%) scale(1.05);
+            /* Pastikan translateX tetap ada saat hover */
+        }
+
+        /* GAYA SPESIFIK untuk setiap tombol - DI SINI ANDA BISA MENGATURNYA */
+        .button-style-1 {
+            bottom: 5%;
+            /* Atur posisi vertikal dari bawah */
+            width: 55%;
+            /* Atur lebar tombol */
+            max-width: 250px;
+            /* Atur lebar maksimal */
+        }
+
+        .button-style-2 {
+            bottom: 130%;
+            /* Posisi berbeda */
+            width: 50%;
+            /* Lebar berbeda */
+            max-width: 280px;
+        }
+
+        .button-style-3 {
+            bottom: 4%;
+            /* Posisi berbeda lagi */
+            width: 50%;
+            /* Lebar berbeda lagi */
+            max-width: 240px;
+        }
+
+        /* <!-- PERUBAHAN DI SINI: CSS BARU UNTUK TOMBOL DI GAMBAR 8 --> */
+        .button-style-4 {
+            /* Ganti nilai 'bottom' ini untuk mengatur ketinggian tombol dari bawah gambar */
+            bottom: -55%;
+            width: 65%;
+            /* Atur lebar sesuai kebutuhan */
+            max-width: 300px;
+            /* Atur lebar maksimal */
+        }
+
+        /* <!-- AKHIR PERUBAHAN CSS --> */
+
+
+        /* Mengembalikan style untuk gambar tombol agar bisa diklik dan selalu terlihat */
+        .overlay-button-img {
+            pointer-events: auto !important;
+            cursor: pointer;
+            opacity: 1 !important;
+            background-color: transparent !important;
+        }
+
+        /* <!-- PERUBAHAN DI SINI: CSS FLOATING BUTTON SUDAH DIHAPUS --> */
+
+        @media (min-width: 768px) {
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                background-color: #f5f7fa;
+            }
+
+            .image-stack-wrapper {
+                margin: 0;
+                box-shadow: 0 0 30px var(--shadow-light);
+            }
+        }
+
+        /* Slideshow Container Styles */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .slideshow-container .mySlides {
+            display: none;
+            width: 100%;
+            animation: fadeEffect 1.5s;
+        }
+
+        .slideshow-container .mySlides img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        @keyframes fadeEffect {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        #slideshow1 .prev,
+        #slideshow1 .next,
+        #slideshow1 .dot-container {
+            display: none;
+        }
+
+        .slideshow-container .prev,
+        .slideshow-container .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            color: var(--text-light);
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            border: none;
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .slideshow-container:hover .prev,
+        .slideshow-container:hover .next {
+            opacity: 0.7;
+        }
+
+        .slideshow-container .prev {
+            left: 10px;
+        }
+
+        .slideshow-container .next {
+            right: 10px;
+        }
+
+        .slideshow-container .prev:hover,
+        .slideshow-container .next:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slideshow-container .prev:active,
+        .slideshow-container .next:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .slideshow-arrow {
+            fill: currentColor;
+            width: 1em;
+            height: 1em;
+        }
+
+        .dot-container {
+            text-align: center;
+            padding: 10px 0;
+            position: absolute;
+            bottom: 5px;
+            width: 100%;
+            z-index: 5;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 10px;
+            width: 10px;
+            margin: 0 4px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .dot.active,
+        .dot:hover {
+            background-color: var(--primary-color);
+            transform: scale(1.2);
+            border-color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="image-stack-wrapper">
+        <img id="img1" src="assets/1.webp" alt="Gambar Pembuka Landing Page" fetchpriority="high">
+
+        <!-- BUTTON 1 DI ATAS GAMBAR 2 -->
+        <div class="image-button-container">
+            <img src="assets/2.webp" alt="Gambar informasi 2" loading="lazy">
+            <a href="#slideshow2" class="overlay-button-link button-style-1" aria-label="Tombol Aksi 1">
+                <img src="assets/button/button 1.webp" class="overlay-button-img" alt="Tombol 1">
+            </a>
+        </div>
+
+        <img src="assets/3.webp" alt="Gambar informasi 3" loading="lazy">
+
+        <!-- BUTTON 2 DI ATAS GAMBAR 4 -->
+        <div class="image-button-container">
+            <img src="assets/4.webp" alt="Gambar informasi 4" loading="lazy">
+            <a href="#slideshow2" class="overlay-button-link button-style-2" aria-label="Tombol Aksi 2">
+                <img src="assets/button/button 2.webp" class="overlay-button-img" alt="Tombol 2">
+            </a>
+        </div>
+
+
+
+        <img src="assets/5.webp" alt="Gambar informasi 5" loading="lazy">
+
+        <!-- BUTTON 3 DI ATAS GAMBAR 6 -->
+        <div class="image-button-container">
+            <img src="assets/6.webp" alt="Gambar informasi 6" loading="lazy">
+            <a href="#testimoni" class="overlay-button-link button-style-3" aria-label="Tombol Aksi 3">
+                <img src="assets/button/button 3.webp" class="overlay-button-img" alt="Tombol 3">
+            </a>
+        </div>
+        <div id="testimoni">
+            <img src="assets/7.webp" alt="Gambar informasi 7" loading="lazy">
+
+            <!-- ======================= PERUBAHAN DI SINI ======================= -->
+            <!-- Gambar 8.webp sekarang dibungkus dengan container agar tombol bisa diletakkan di depannya -->
+            <div class="image-button-container">
+                <img src="assets/8.webp" alt="Gambar informasi 8" loading="lazy">
+
+                <!-- Tombol baru "Hubungi Sekarang" yang diletakkan di atas gambar 8.webp -->
+                <a href="https://paketkemitraan.biz.id/p/k-mie" class="overlay-button-link button-style-4"
+                    target="_blank" rel="noopener noreferrer" aria-label="Tombol Hubungi Sekarang"
+                    style="margin-top:20px; display:inline-block;">
+                    <img src="assets/button/button 4.webp" class="overlay-button-img" alt="Tombol Hubungi Sekarang">
+                </a>
+
+            </div>
+            <!-- ======================= AKHIR PERUBAHAN ======================= -->
+
+            <img src="assets/9.webp" alt="Gambar informasi 9" loading="lazy">
+            <img src="assets/10.webp" alt="Gambar informasi 10" loading="lazy">
+
+        </div>
+
+    </div> <!-- Akhir dari image-stack-wrapper -->
+
+    <!-- ============== PERUBAHAN DI SINI: FLOATING BUTTON SUDAH DIHAPUS ============== -->
+
+
+    <script>
+        // TIDAK ADA PERUBAHAN PADA JAVASCRIPT
+        document.addEventListener('DOMContentLoaded', function () {
+            const imagesToLoad = document.querySelectorAll('.image-stack-wrapper img');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.classList.add('loaded');
+                        observer.unobserve(img);
+                    }
+                });
+            }, { rootMargin: '100px 0px' });
+            imagesToLoad.forEach(img => {
+                if (img.id === 'img1') {
+                    if (img.complete) { img.classList.add('loaded'); }
+                    else { img.addEventListener('load', () => img.classList.add('loaded')); }
+                } else { imageObserver.observe(img); }
+            });
+            const slideshows = {
+                1: { container: document.getElementById('slideshow1'), index: 1, timer: null, interval: 5000 },
+                2: { container: document.getElementById('slideshow2'), index: 1, timer: null, interval: 5000 }
+            };
+            function setupSlideshow(num) {
+                const s = slideshows[num];
+                if (!s || !s.container) return;
+                s.slides = s.container.getElementsByClassName('mySlides');
+                if (s.slides.length === 0) return;
+                const dotsContainer = s.container.querySelector('.dot-container');
+                if (dotsContainer) {
+                    dotsContainer.innerHTML = '';
+                    for (let i = 0; i < s.slides.length; i++) {
+                        const dot = document.createElement('span');
+                        dot.classList.add('dot');
+                        dot.setAttribute('aria-label', `Pergi ke slide ${i + 1}`);
+                        dot.onclick = () => currentSlide(num, i + 1);
+                        dotsContainer.appendChild(dot);
+                    }
+                    s.dots = dotsContainer.getElementsByClassName('dot');
+                }
+                showSlides(num);
+                startAutoSlide(num);
+                s.container.addEventListener('mouseenter', () => stopAutoSlide(num));
+                s.container.addEventListener('mouseleave', () => startAutoSlide(num));
+            }
+            function showSlides(num, n) {
+                const s = slideshows[num];
+                if (!s || s.slides.length === 0) return;
+                if (n !== undefined) s.index = n;
+                if (s.index > s.slides.length) s.index = 1;
+                if (s.index < 1) s.index = s.slides.length;
+                for (let i = 0; i < s.slides.length; i++) { s.slides[i].style.display = 'none'; }
+                if (s.dots) { for (let i = 0; i < s.dots.length; i++) { s.dots[i].classList.remove('active'); } }
+                s.slides[s.index - 1].style.display = 'block';
+                if (s.dots) { s.dots[s.index - 1].classList.add('active'); }
+            }
+            function startAutoSlide(num) {
+                const s = slideshows[num];
+                if (!s || s.timer) return;
+                s.timer = setInterval(() => { s.index++; showSlides(num); }, s.interval);
+            }
+            function stopAutoSlide(num) {
+                const s = slideshows[num];
+                if (s && s.timer) { clearInterval(s.timer); s.timer = null; }
+            }
+            window.plusSlides = (num, n) => { stopAutoSlide(num); showSlides(num, slideshows[num].index += n); };
+            window.currentSlide = (num, n) => { stopAutoSlide(num); showSlides(num, n); };
+            setupSlideshow(1);
+            setupSlideshow(2);
+        });
+    </script>
+</body>
+
+</html>
